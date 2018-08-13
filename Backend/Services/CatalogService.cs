@@ -160,7 +160,14 @@ namespace Backend.Services
             _context.Messages.Remove(message);
 
             await _context.SaveChangesAsync();
-
+        }
+        public List<Catalog> GetRoots()
+        {
+            var temp = from catalog in _context.Catalogs
+                       where catalog.ParentCatalogId == null
+                       select catalog;
+            if (temp == null) throw new NotFoundException();
+            return temp.ToList();
         }
 
         public Message GetMessage(string id)

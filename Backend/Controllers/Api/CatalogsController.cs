@@ -36,9 +36,19 @@ namespace Backend.Controllers.Api
 
             return Ok(_mapper.Map<CatalogViewModel>(catalog));
         }
+        [Authorize(Roles = RoleModel.User)]
+        [HttpGet("GetRoots")]
+        //[ProducesResponseType(201, Type = typeof(List<Catalog>))]
+        //[ProducesResponseType(400)]
+        public ActionResult GetRoots()
+        {
+            //var catalogs = _catalogService.GetRoots();
+
+            return Ok(_catalogService.GetRoots());
+        }
 
         [Authorize(Roles = RoleModel.Admin + ", " + RoleModel.User)]
-        [HttpGet("{id}")]
+        [HttpGet("GetCatalog/{id}")]
         public ActionResult GetCatalog(string id)
         {
             var catalog = _catalogService.GetCatalog(id);
