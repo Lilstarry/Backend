@@ -38,12 +38,8 @@ namespace Backend.Controllers.Api
         }
         [Authorize(Roles = RoleModel.User)]
         [HttpGet("GetRoots")]
-        //[ProducesResponseType(201, Type = typeof(List<Catalog>))]
-        //[ProducesResponseType(400)]
         public ActionResult GetRoots()
         {
-            //var catalogs = _catalogService.GetRoots();
-
             return Ok(_catalogService.GetRoots());
         }
 

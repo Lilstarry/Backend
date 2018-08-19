@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-
 namespace Backend.Controllers
 {
     [ApiVersion("1.0")]
@@ -46,6 +45,15 @@ namespace Backend.Controllers
             }
             await _um.AddToRoleAsync(user, RoleModel.User);
             return Ok();
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public ContentResult GetRole()
+        {
+            if (User.IsInRole(RoleModel.Admin)) return Content(RoleModel.Admin);
+            if (User.IsInRole(RoleModel.User)) return Content(RoleModel.User);
+            return Content("ANONYMOUS");
         }
     }
 }
