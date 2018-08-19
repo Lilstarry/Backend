@@ -49,11 +49,11 @@ namespace Backend.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public ContentResult GetRole()
+        public JsonResult GetRole()
         {
-            if (User.IsInRole(RoleModel.Admin)) return Content(RoleModel.Admin);
-            if (User.IsInRole(RoleModel.User)) return Content(RoleModel.User);
-            return Content("ANONYMOUS");
+            if (User.IsInRole(RoleModel.Admin)) return Json(RoleModel.Admin);
+            if (User.IsInRole(RoleModel.User)) return Json(RoleModel.User);
+            return Json("ANONYMOUS");
         }
     }
 }
